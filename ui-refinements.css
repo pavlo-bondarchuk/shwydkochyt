@@ -84,6 +84,120 @@
 .result-action-primary:hover { box-shadow: 0 16px 38px rgba(184,80,10,.24), inset 0 1px 0 rgba(255,255,255,.55); }
 .result-action-secondary:hover { background: var(--accent-soft); box-shadow: 0 12px 28px rgba(55,35,20,.09); }
 
+.trainer-shell.is-training .reader-topline {
+  position: sticky;
+  top: 18px;
+  z-index: 12;
+  width: fit-content;
+  margin: 0 auto 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.trainer-shell.is-training .reader-topline > div:first-child,
+.trainer-shell.is-training .reader-meta {
+  display: none;
+}
+
+.trainer-shell.is-training .timer-box,
+.trainer-shell.is-training .focus-live-wpm {
+  position: static;
+  min-width: 142px;
+  height: 58px;
+  padding: 8px 16px;
+  border: 1px solid rgba(231,221,207,.95);
+  border-radius: 999px;
+  background: rgba(255,255,255,.84);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  box-shadow: 0 12px 34px rgba(55,35,20,.09), inset 0 1px 0 rgba(255,255,255,.82);
+  display: grid;
+  grid-template-columns: 28px auto;
+  grid-template-rows: auto auto;
+  column-gap: 9px;
+  align-items: center;
+  text-align: left;
+}
+
+.trainer-shell.is-training .timer-box::before,
+.trainer-shell.is-training .focus-live-wpm::before {
+  content: "";
+  grid-column: 1;
+  grid-row: 1 / 3;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 15px 15px;
+}
+
+.trainer-shell.is-training .timer-box::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23b8500a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 2h4'/%3E%3Cpath d='M12 14v-4'/%3E%3Cpath d='M4 13a8 8 0 1 0 8-8 8 8 0 0 0-8 8Z'/%3E%3C/path%3E%3C/svg%3E");
+}
+
+.trainer-shell.is-training .focus-live-wpm::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23b8500a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 14 4-4'/%3E%3Cpath d='M3.34 19a10 10 0 1 1 17.32 0'/%3E%3C/svg%3E");
+}
+
+.trainer-shell.is-training .timer-box > span,
+.trainer-shell.is-training .focus-live-wpm > span {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.trainer-shell.is-training .timer-box > strong,
+.trainer-shell.is-training .focus-live-wpm > strong {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  color: var(--tertiary);
+  font-size: 20px;
+  font-weight: 850;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+
+.trainer-shell.is-training .focus-live-wpm strong small {
+  margin-left: 3px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .trainer-shell.is-training .reader-topline { top: 12px; gap: 8px; }
+  .trainer-shell.is-training .timer-box,
+  .trainer-shell.is-training .focus-live-wpm {
+    min-width: 122px;
+    height: 52px;
+    padding: 7px 12px;
+    grid-template-columns: 25px auto;
+    column-gap: 7px;
+  }
+  .trainer-shell.is-training .timer-box::before,
+  .trainer-shell.is-training .focus-live-wpm::before {
+    width: 25px;
+    height: 25px;
+    border-radius: 9px;
+    background-size: 14px 14px;
+  }
+  .trainer-shell.is-training .timer-box > strong,
+  .trainer-shell.is-training .focus-live-wpm > strong { font-size: 17px; }
+}
+
 @media (max-width: 560px) {
   .result-action { width: 100%; }
+  .trainer-shell.is-training .reader-topline { transform: scale(.92); transform-origin: top center; }
 }
