@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#fffdf9" />
   <title>Швидкочит — тренажер швидкого читання</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="ui-refinements.css" />
 </head>
 <body>
   <div class="site-shell">
@@ -143,7 +144,7 @@
                       <span class="mode-icon"><i data-lucide="gauge" aria-hidden="true"></i></span>
                       <span class="mode-copy">
                         <span data-i18n="pacedMode">За темпом</span>
-                        <small data-i18n="pacedModeStatus">Автоматичний темп</small>
+                        <small>Автоматичний темп</small>
                       </span>
                     </button>
                     <button class="mode-button" data-mode="voice" type="button">
@@ -170,6 +171,10 @@
                     </div>
                   </div>
 
+                  <button class="mic-button is-internal-control" id="micButton" type="button" tabindex="-1" aria-hidden="true">
+                    <span class="mic-icon"><i data-lucide="microphone" aria-hidden="true"></i></span>
+                    <span id="micLabel" data-i18n="enableMic">Увімкнути мікрофон</span>
+                  </button>
                   <p class="mic-status" id="micStatus" hidden></p>
                   <p class="mic-note" id="micNote" data-i18n="micNote">У голосовому режимі слова підкреслюються за розпізнаною мовою.</p>
                 </div>
@@ -300,5 +305,6 @@
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script src="app.js"></script>
+  <script src="ui-refinements.js"></script>
 </body>
 </html>
