@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fffdf9" />
+  <title>Швидкочит — тренажер швидкого читання</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Швидкочит">
+        <span class="brand-mark"><i data-lucide="arrow-up-right" aria-hidden="true"></i></span>
+        <span data-i18n="brand">Швидкочит</span>
+      </a>
+      <div class="header-actions">
+        <div class="language-switch" aria-label="Language">
+          <button class="lang-button is-active" data-lang="uk" type="button">UA</button>
+          <button class="lang-button" data-lang="en" type="button">EN</button>
+        </div>
+        <button class="header-cta" id="headerStart" type="button" data-i18n="startTraining">Почати тренування</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="landing-hero">
+        <div class="hero-copy">
+          <span class="eyebrow" data-i18n="eyebrow">ТРЕНАЖЕР ШВИДКОГО ЧИТАННЯ</span>
+          <h1 data-i18n-html="heroTitle">Читайте швидше.<br><span>Бачте свій реальний темп.</span></h1>
+          <p data-i18n="heroText">Тренуйте читання у заданому темпі або читайте вголос — тренажер підкреслить розпізнані слова та покаже вашу фактичну швидкість у реальному часі.</p>
+          <div class="hero-actions">
+            <button class="primary-cta" id="heroStart" type="button">
+              <span data-i18n="startTraining">Почати тренування</span>
+              <span class="cta-icon"><i data-lucide="arrow-up-right" aria-hidden="true"></i></span>
+            </button>
+            <span class="hero-note" data-i18n="heroNote">Без реєстрації · результат можна зберегти локально</span>
+          </div>
+        </div>
+
+        <div class="hero-side-card">
+          <span class="hero-side-label" data-i18n="livePace">РЕАЛЬНИЙ ТЕМП</span>
+          <strong>238</strong>
+          <span data-i18n="wpmShort">слів/хв</span>
+          <div class="mini-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </section>
+
+      <section class="product-showcase">
+        <div class="showcase-copy">
+          <span class="section-kicker">01</span>
+          <h2 data-i18n="showcaseTitle">Ваш текст стає інтерактивною доріжкою читання.</h2>
+          <p data-i18n="showcaseText">Оберіть навчальний текст, вставте власний або завантажте TXT. У режимі голосу позиція рухається не за таймером, а за тим, що ви реально вимовили.</p>
+        </div>
+
+        <div class="trainer-preview-wrap" id="previewAnchor">
+          <div class="preview-glow"></div>
+          <section class="trainer-shell is-preview" id="trainerShell" aria-label="Speed reading trainer">
+            <header class="trainer-header">
+              <div class="trainer-brand">
+                <span class="brand-mark small"><i data-lucide="arrow-up-right" aria-hidden="true"></i></span>
+                <div>
+                  <strong data-i18n="brand">Швидкочит</strong>
+                  <small id="trainerModeLabel" data-i18n="trainerSubtitle">інтерактивне тренування</small>
+                </div>
+              </div>
+              <div class="trainer-header-actions">
+                <span class="saved-badge" id="savedBadge" hidden></span>
+                <button class="icon-button" id="resetButton" type="button" aria-label="Reset"><i data-lucide="rotate-ccw" aria-hidden="true"></i></button>
+                <button class="close-button" id="closeTrainer" type="button" aria-label="Close"><i data-lucide="x" aria-hidden="true"></i></button>
+              </div>
+            </header>
+
+            <div class="focus-toolbar" id="focusToolbar" aria-label="Training controls">
+              <button class="focus-icon-button" id="settingsToggle" type="button" aria-label="Налаштування" title="Налаштування">
+                <i data-lucide="settings" aria-hidden="true"></i>
+              </button>
+              <button class="focus-icon-button" id="focusClose" type="button" aria-label="Закрити" title="Закрити">
+                <i data-lucide="x" aria-hidden="true"></i>
+              </button>
+            </div>
+            <button class="settings-scrim" id="settingsScrim" type="button" aria-label="Закрити налаштування"></button>
+
+            <div class="trainer-body">
+              <aside class="control-panel">
+                <div class="control-section">
+                  <div class="section-heading">
+                    <span class="step">01</span>
+                    <div>
+                      <h3 data-i18n="chooseText">Оберіть текст</h3>
+                      <p data-i18n="chooseTextHint">Навчальний або власний</p>
+                    </div>
+                  </div>
+
+                  <div class="tabs" role="tablist">
+                    <button class="tab is-active" data-tab="library" data-i18n="library" type="button">Навчальні</button>
+                    <button class="tab" data-tab="custom" data-i18n="custom" type="button">Свій текст</button>
+                  </div>
+
+                  <div class="tab-panel is-active" data-panel="library">
+                    <div class="text-list" id="textList"></div>
+                  </div>
+
+                  <div class="tab-panel" data-panel="custom">
+                    <textarea id="customText" data-i18n-placeholder="pastePlaceholder" placeholder="Вставте текст..."></textarea>
+                    <div class="upload-row">
+                      <input type="file" id="fileInput" accept=".txt,text/plain" hidden />
+                      <button class="secondary-button" id="uploadButton" type="button" data-i18n="uploadTxt">Завантажити .txt</button>
+                      <span class="file-name" id="fileName" data-i18n="noFile">Файл не вибрано</span>
+                    </div>
+                    <button class="dark-button full" id="useCustomButton" type="button" data-i18n="useText">Використати текст</button>
+                  </div>
+                </div>
+
+                <div class="control-section pace-section">
+                  <div class="section-heading split">
+                    <div class="section-heading-inline">
+                      <span class="step">02</span>
+                      <div>
+                        <h3 data-i18n="paceLab">Темп і замір</h3>
+                        <p data-i18n="paceHint">Ціль проти вашого темпу</p>
+                      </div>
+                    </div>
+                    <span class="target-value"><strong id="speedValue">240</strong> <span data-i18n="wpmShort">слів/хв</span></span>
+                  </div>
+
+                  <input id="speedRange" type="range" min="80" max="800" step="10" value="240" />
+                  <div class="range-labels"><span>80</span><span>800</span></div>
+
+                  <div class="timer-setting">
+                    <div>
+                      <strong data-i18n="timerDuration">Тривалість тренування</strong>
+                      <small data-i18n="timerDurationHint">За замовчуванням 60 секунд</small>
+                    </div>
+                    <label>
+                      <input id="durationInput" type="number" min="5" max="86400" step="5" value="60" inputmode="numeric" />
+                      <span data-i18n="secondsShort">сек</span>
+                    </label>
+                  </div>
+
+                  <div class="mode-switch" role="group" aria-label="Training mode">
+                    <button class="mode-button is-active" data-mode="paced" type="button">
+                      <span class="mode-icon"><i data-lucide="play" aria-hidden="true"></i></span>
+                      <span data-i18n="pacedMode">За темпом</span>
+                    </button>
+                    <button class="mode-button" data-mode="voice" type="button">
+                      <span class="mode-icon"><i data-lucide="microphone" aria-hidden="true"></i></span>
+                      <span data-i18n="voiceMode">Голосом</span>
+                    </button>
+                  </div>
+
+                  <div class="pace-meter" id="paceMeter">
+                    <div class="pace-stat target">
+                      <span data-i18n="targetPace">Ціль</span>
+                      <strong><b id="targetPaceValue">240</b> <small data-i18n="wpmShort">слів/хв</small></strong>
+                    </div>
+                    <div class="pace-stat actual">
+                      <span data-i18n="yourPace">Ваш темп</span>
+                      <strong><b id="actualPaceValue">—</b> <small data-i18n="wpmShort">слів/хв</small></strong>
+                    </div>
+                    <div class="pace-feedback is-neutral" id="paceFeedback">
+                      <span class="feedback-dot"></span>
+                      <span id="paceFeedbackText" data-i18n="paceWaiting">Почніть читати для заміру</span>
+                    </div>
+                  </div>
+
+                  <button class="mic-button" id="micButton" type="button">
+                    <span class="mic-icon"><i data-lucide="microphone" aria-hidden="true"></i></span>
+                    <span id="micLabel" data-i18n="enableMic">Увімкнути мікрофон</span>
+                  </button>
+                  <p class="mic-status" id="micStatus" hidden></p>
+                  <p class="mic-note" id="micNote" data-i18n="micNote">У голосовому режимі слова підкреслюються за розпізнаною мовою.</p>
+                </div>
+              </aside>
+
+              <section class="reader-panel">
+                <div class="reader-topline">
+                  <div>
+                    <span class="mini-label" data-i18n="currentText">ПОТОЧНИЙ ТЕКСТ</span>
+                    <h2 id="currentTitle">Як мозок читає текст</h2>
+                  </div>
+                  <div class="timer-box">
+                    <span data-i18n="timer">ТАЙМЕР</span>
+                    <strong id="timerValue">00:00</strong>
+                  </div>
+                  <div class="focus-live-wpm">
+                    <span data-i18n="liveSpeed">ШВИДКІСТЬ</span>
+                    <strong><b id="focusWpmValue">0</b> <small data-i18n="wpmShort">слів/хв</small></strong>
+                  </div>
+                </div>
+
+                <div class="reader-meta">
+                  <span><strong id="wordCount">0</strong> <span data-i18n="words">слів</span></span>
+                  <span>·</span>
+                  <span id="estimatedTime">≈ 1 хв</span>
+                  <span class="listening-pill" id="listeningPill" hidden><i></i><span data-i18n="listening">слухаю</span></span>
+                </div>
+
+                <div class="reading-stage" id="readingStage" tabindex="0">
+                  <div class="reading-text" id="readingText"></div>
+                </div>
+
+                <div class="progress-wrap">
+                  <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+                  <div class="progress-meta">
+                    <span id="progressPercent">0%</span>
+                    <span><span id="wordsRead">0</span> / <span id="wordsTotal">0</span> <span data-i18n="words">слів</span></span>
+                  </div>
+                </div>
+
+                <div class="reader-controls">
+                  <button class="round-control" id="backButton" type="button">−10</button>
+                  <button class="start-button" id="startButton" type="button">
+                    <span class="start-icon" id="startIcon"><i data-lucide="play" aria-hidden="true"></i></span>
+                    <span id="startLabel" data-i18n="start">Почати тренування</span>
+                  </button>
+                  <button class="round-control" id="forwardButton" type="button">+10</button>
+                </div>
+
+                <div class="result-panel" id="resultPanel" hidden>
+                  <div class="result-card">
+                    <span class="result-kicker" data-i18n="resultTitle">Ваш результат</span>
+                    <div class="result-main"><strong id="resultWpm">0</strong><span data-i18n="resultSpeed">слів за хвилину</span></div>
+                    <div class="result-details">
+                      <div><span data-i18n="resultWords">Прочитано слів</span><strong id="resultWords">0</strong></div>
+                      <div><span data-i18n="resultDuration">Час тесту</span><strong id="resultTime">01:00</strong></div>
+                    </div>
+                    <div class="result-actions">
+                      <button class="button-secondary" id="resultSettings" type="button" data-i18n="backToSettings">До налаштувань</button>
+                      <button class="button-primary" id="resultRetry" type="button" data-i18n="retryTest">Пройти ще раз</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="focus-stop-wrap" id="focusStopWrap">
+                  <div class="focus-action-glow" aria-hidden="true"></div>
+                  <div class="focus-action-row">
+                    <button class="focus-stop-button" id="focusStopButton" type="button">
+                      <span class="focus-stop-icon" id="focusActionIcon">
+                        <i data-lucide="play" aria-hidden="true"></i>
+                      </span>
+                      <span id="focusActionLabel">Почати</span>
+                    </button>
+                    <button class="focus-reset-button" id="focusResetButton" type="button" hidden>
+                      <span class="focus-reset-icon"><i data-lucide="rotate-ccw" aria-hidden="true"></i></span>
+                      <span id="focusResetLabel">Почати заново</span>
+                    </button>
+                  </div>
+                  <span class="focus-stop-hint" id="focusActionHint">Почати тест на швидкість читання</span>
+                </div>
+
+                <div class="session-strip">
+                  <div><span data-i18n="sessionTime">Час</span><strong id="sessionTime">00:00</strong></div>
+                  <div><span data-i18n="actualPace">Фактичний темп</span><strong id="sessionWpm">—</strong></div>
+                  <div><span data-i18n="progress">Прогрес</span><strong id="sessionProgress">0%</strong></div>
+                  <div><span data-i18n="recognized">Розпізнано</span><strong id="recognitionScore">—</strong></div>
+                </div>
+              </section>
+            </div>
+
+            <div class="preview-cover">
+              <div class="preview-cover-copy">
+                <span data-i18n="previewLabel">ІНТЕРАКТИВНИЙ ТРЕНАЖЕР</span>
+                <strong data-i18n="previewTitle">Спробуйте у повному екрані</strong>
+                <button id="previewStart" type="button"><span data-i18n="openTrainer">Відкрити тренажер</span><span class="cta-icon"><i data-lucide="arrow-up-right" aria-hidden="true"></i></span></button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="benefits">
+        <article><span>01</span><h3 data-i18n="benefit1Title">Читаєте у своєму темпі</h3><p data-i18n="benefit1Text">Виберіть цільову швидкість і тренуйте плавність без стрибків.</p></article>
+        <article><span>02</span><h3 data-i18n="benefit2Title">Говорите — текст реагує</h3><p data-i18n="benefit2Text">Мікрофон рухає підсвічування за реально розпізнаними словами.</p></article>
+        <article><span>03</span><h3 data-i18n="benefit3Title">Бачите різницю</h3><p data-i18n="benefit3Text">Порівнюйте фактичний WPM із цільовим і коригуйте темп одразу.</p></article>
+      </section>
+    </main>
+  </div>
+
+  <div class="save-dialog-backdrop" id="saveDialog" hidden>
+    <div class="save-dialog" role="dialog" aria-modal="true" aria-labelledby="saveDialogTitle">
+      <span class="dialog-icon"><i data-lucide="check" aria-hidden="true"></i></span>
+      <h2 id="saveDialogTitle" data-i18n="saveTitle">Зберегти результат тренування?</h2>
+      <p id="saveSummary"></p>
+      <div class="dialog-actions">
+        <button class="secondary-button" id="closeWithoutSave" type="button" data-i18n="dontSave">Не зберігати</button>
+        <button class="dark-button" id="cancelClose" type="button" data-i18n="continueTraining">Продовжити</button>
+        <button class="orange-button" id="saveAndClose" type="button" data-i18n="saveAndClose">Зберегти й закрити</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
